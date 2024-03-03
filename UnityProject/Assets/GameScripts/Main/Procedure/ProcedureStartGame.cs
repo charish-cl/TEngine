@@ -1,6 +1,7 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using TEngine;
+using UnityEngine;
 
 namespace GameMain
 {
@@ -18,6 +19,14 @@ namespace GameMain
         {
             await UniTask.Yield();
             UILoadMgr.HideAll();
+            GameEvent.AddEventListener("TEngine很好用",EventTest);
+            GameEvent.Send("TEngine很好用");
+           // await GameModule.Resource.LoadAssetAsync<SkillDisplayData>(location,CancellationToken.None);
+        }
+
+        private void EventTest()
+        {
+            Log.Debug("确实好用");
         }
     }
 }

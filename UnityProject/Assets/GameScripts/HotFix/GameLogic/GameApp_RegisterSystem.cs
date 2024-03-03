@@ -21,6 +21,11 @@ public partial class GameApp
     /// </summary>
     private void InitSystemSetting()
     {
+        //姑且这四个系统吧
+        AddLogicSys(BattleSystem.Instance);
+        AddLogicSys(LevelSystem.Instance);
+        AddLogicSys(RoundSystem.Instance);
+        AddLogicSys(SkillSystem.Instance);
         
     }
 
