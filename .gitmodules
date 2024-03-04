@@ -1,0 +1,3 @@
+[submodule "UnityProject/Assets/FEngine"]
+	path = UnityProject/Assets/FEngine
+	url = https://github.com/charish-cl/FEngine.git
