@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FEngine;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Snake:MonoBehaviour
 {
@@ -23,6 +24,13 @@ public class Snake:MonoBehaviour
     public List<Vector3> Positions=new List<Vector3>();
     public List<float> Directions=new List<float>();
     
+    Matrix4x4[] matrices;
+    private void Start()
+    {
+        matrices=new Matrix4x4[1000];
+    }
+
+   
     private void Update()
     {
         //获取鼠标位置,舌头朝向鼠标位置
@@ -64,13 +72,13 @@ public class Snake:MonoBehaviour
 
     private void UpdateSegments()
     {
+        
         for (int i = 0; i < Segments.Count; i++)
         {
-           
-            // Segments[i].transform.position = LastPosition(i*10);
-            // Segments[i].transform.eulerAngles = new Vector3(0, 0, LastDirection(i*10));
-            DrawSnakeSegment(LastPosition(i*10), LastDirection(i*10));
+           //获取位置，方向，添加到Matrices中
+           matrices[i]=Matrix4x4.TRS(LastPosition((i+1)*10), Quaternion.Euler(0, 0, LastDirection((i+1)*10)), Vector3.one);
         }
+        Graphics.DrawMeshInstanced(Main.Instance.Mesh, 0, Main.Instance.Material, matrices);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -89,9 +97,6 @@ public class Snake:MonoBehaviour
     {
         //生成一个新的蛇身，依据蛇尾位置，方向，生成新的蛇身
         var tail = new SnakeSegment();
-        // tail.transform.ResetLocalTransform();
-        // tail.transform.position = LastPosition(10*(Segments.Count+1));
-        // tail.transform.eulerAngles = new Vector3(0, 0, LastDirection(Segments.Count));
         //将新的蛇身添加到蛇身列表中
         Segments.Add(tail);
     }
@@ -114,9 +119,6 @@ public class Snake:MonoBehaviour
         return transform.position;
     }
 
-    public void DrawSnakeSegment(Vector3 position, float direction)
-    {
-        Graphics.DrawMeshInstanced(Main.Instance.Mesh, 0, Main.Instance.Material, new[] {Matrix4x4.TRS(position, Quaternion.Euler(0, 0, direction), Vector3.one)});
-    }
+   
 }
 
