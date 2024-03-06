@@ -26,6 +26,9 @@ public class Main : MonoSingleton<Main>
     
     
     Snake Snake;
+    
+    public Mesh Mesh;
+    public Material Material;
     void Start()
     {
          //生成蛇

@@ -1,7 +1,7 @@
 ﻿
 using UnityEngine;
 
-public class SnakeSegment:MonoBehaviour
+public class SnakeSegment
 {
    
 }

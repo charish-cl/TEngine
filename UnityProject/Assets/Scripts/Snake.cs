@@ -38,6 +38,12 @@ public class Snake:MonoBehaviour
             Debug.Log("Game Over");
             Destroy(gameObject);
         }
+        //更新蛇身位置
+        if (Segments.Count > 0)
+        {
+            UpdateSegments();
+        }
+
     }
     
     private void FixedUpdate()
@@ -53,21 +59,17 @@ public class Snake:MonoBehaviour
         transform.position = newPosition;
         Positions.Add(newPosition);
         
-        //更新蛇身位置
-        if (Segments.Count > 0)
-        {
-            UpdateSegments();
-        }
-       
+        
     }
 
     private void UpdateSegments()
     {
-        
         for (int i = 0; i < Segments.Count; i++)
         {
-            Segments[i].transform.position = LastPosition(i*10);
-            Segments[i].transform.eulerAngles = new Vector3(0, 0, LastDirection(i*10));
+           
+            // Segments[i].transform.position = LastPosition(i*10);
+            // Segments[i].transform.eulerAngles = new Vector3(0, 0, LastDirection(i*10));
+            DrawSnakeSegment(LastPosition(i*10), LastDirection(i*10));
         }
     }
 
@@ -86,11 +88,10 @@ public class Snake:MonoBehaviour
     public void Eat()
     {
         //生成一个新的蛇身，依据蛇尾位置，方向，生成新的蛇身
-        var tail = Instantiate(Main.Instance.SnakeSegmentPrefab,transform).GetComponent<SnakeSegment>();
-        tail.transform.ResetLocalTransform();
-        
-        tail.transform.position = LastPosition(10*(Segments.Count+1));
-        tail.transform.eulerAngles = new Vector3(0, 0, LastDirection(Segments.Count));
+        var tail = new SnakeSegment();
+        // tail.transform.ResetLocalTransform();
+        // tail.transform.position = LastPosition(10*(Segments.Count+1));
+        // tail.transform.eulerAngles = new Vector3(0, 0, LastDirection(Segments.Count));
         //将新的蛇身添加到蛇身列表中
         Segments.Add(tail);
     }
@@ -111,6 +112,11 @@ public class Snake:MonoBehaviour
             return Positions[Positions.Count-1 - index];
         }
         return transform.position;
+    }
+
+    public void DrawSnakeSegment(Vector3 position, float direction)
+    {
+        Graphics.DrawMeshInstanced(Main.Instance.Mesh, 0, Main.Instance.Material, new[] {Matrix4x4.TRS(position, Quaternion.Euler(0, 0, direction), Vector3.one)});
     }
 }
 
