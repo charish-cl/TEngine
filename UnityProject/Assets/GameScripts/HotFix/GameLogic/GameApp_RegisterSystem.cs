@@ -26,7 +26,8 @@ public partial class GameApp
         AddLogicSys(LevelSystem.Instance);
         AddLogicSys(RoundSystem.Instance);
         AddLogicSys(SkillSystem.Instance);
-        
+        AddLogicSys(MapSystem.Instance);
+        AddLogicSys(DamageSystem.Instance);
     }
 
     /// <summary>
