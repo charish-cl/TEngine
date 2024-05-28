@@ -13,6 +13,7 @@ Example:
 ************************************************************************************************************/
 #endregion
 
+using HybridCLR.Editor.Settings;
 using System;
 using System.Collections;
 using System.Collections.Generic;
