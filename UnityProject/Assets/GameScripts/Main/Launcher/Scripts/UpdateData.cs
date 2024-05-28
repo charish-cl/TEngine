@@ -37,7 +37,7 @@ public enum GameStatus
     First = 0,
     AssetLoad = 1
 }
-
+//TODO:底包版本更新
 /// <summary>
 /// 版本更新数据。
 /// </summary>
