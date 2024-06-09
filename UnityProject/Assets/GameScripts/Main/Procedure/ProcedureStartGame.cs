@@ -1,5 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using GameLogic;
 using TEngine;
 using UnityEngine;
 
@@ -21,6 +22,8 @@ namespace GameMain
             UILoadMgr.HideAll();
             GameEvent.AddEventListener("TEngine很好用",EventTest);
             GameEvent.Send("TEngine很好用");
+            // GameModule.UI.ShowUI<UIListWidget<int,int>>();
+           // GameModule.UI.ShowUI();
            // await GameModule.Resource.LoadAssetAsync<SkillDisplayData>(location,CancellationToken.None);
         }
 
